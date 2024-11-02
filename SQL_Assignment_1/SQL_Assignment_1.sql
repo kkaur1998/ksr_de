@@ -1,0 +1,91 @@
+USE KSR_DB;
+
+# 1) What is total number of orders placed?
+SELECT COUNT(1) AS TOTAL_ORDERS FROM ELE_TB;
+
+# 2) What are the unique channels present and how many are there?
+SELECT CHANNEL, COUNT(1) COUNT FROM ELE_TB 
+GROUP BY CHANNEL;
+
+# 3) How many cities are there?
+SELECT COUNT(DISTINCT CITY) AS TOTAL_CITIES FROM ELE_TB;
+
+# 4) Query the total cities count by Country
+SELECT COUNTRY, COUNT(DISTINCT CITY) FROM ELE_TB
+GROUP BY COUNTRY;
+#--------------VERIFICATION OF ABOVE QUERY
+SELECT COUNT(DISTINCT CITY) FROM ELE_TB 
+WHERE COUNTRY='GERMANY';
+
+# 5) How many products are there?
+SELECT COUNT(DISTINCT PRODUCTNAME) TOTAL_PRODUCTS FROM ELE_TB;
+
+# 6) Query the total sales and total profit?
+SELECT SUM(SALES) AS TOTAL_SALES, SUM(PROFIT) TOTAL_PROFIT FROM ELE_TB;
+
+# 7) Query the total sales by region and country?
+SELECT REGION, COUNTRY, SUM(SALES) FROM ELE_TB 
+GROUP BY REGION, COUNTRY
+ORDER BY REGION;
+
+# 8) Query the total order qty by promotion name?
+SELECT PROMOTIONNAME, SUM(ORDERQTY) AS TOTAL_QUANTITY FROM ELE_TB
+GROUP BY PROMOTIONNAME;
+
+# 9) How much the total sales happened in Asia region?
+SELECT REGION, SUM(SALES) AS TOTAL_SALES FROM ELE_TB
+WHERE REGION='ASIA';
+
+# 10) How much profit got in Asia region and India?
+SELECT REGION, COUNTRY, SUM(PROFIT) AS TOTAL_SALES FROM ELE_TB
+WHERE REGION='ASIA' AND COUNTRY='INDIA';
+
+#11) Query the total order qty by Manufacturer and Product Name?
+SELECT mANUFACTURER, PRODUCTNAME, SUM(ORDERQTY) AS TOTAL_QUANTITY FROM ELE_TB 
+GROUP BY MANUFACTURER, PRODUCTNAME;
+
+#12) Query the total order quantity greater than 27 by city?
+SELECT CITY, SUM(ORDERQTY) AS TOTAL_QUANTITY FROM ELE_TB
+GROUP BY CITY 
+HAVING TOTAL_QUANTITY>27;
+
+#13) How much total sales happened in China and Beijing?
+SELECT COUNTRY, CITY, SUM(SALES) FROM ELE_TB 
+WHERE CITY='BEIJING'AND COUNTRY='CHINA'
+GROUP BY COUNTRY,CITY;
+
+
+# 14) How much total sales happened in Asian Holiday Promotion?
+SELECT REGION, PROMOTIONNAME, SUM(SALES) AS TOTAL_SALE  FROM ELE_TB 
+WHERE PROMOTIONNAME='Asian Holiday Promotion' AND REGION='ASIA';
+
+
+# 15) How much total profit value by Contoso, Ltd Manufacturer?
+SELECT MANUFACTURER, SUM(PROFIT) FROM ELE_TB 
+WHERE MANUFACTURER='cONTOSO, LTD';
+
+# 16) Query the total sales and total order qty by productcategory?
+SELECT PRODUCTCATEGORY, SUM(SALES) AS TOTAL_SALE, SUM(ORDERQTY) AS TOTAL_QUANTITY 
+FROM ELE_TB
+GROUP BY PRODUCTCATEGORY;
+
+# 17) Query the total sales value in between 1057 and 26700 by Region?
+SELECT REGION, SUM(SALES) AS TOTAL_SALES FROM ELE_TB 
+WHERE SALES BETWEEN 1057 AND 26700
+GROUP BY REGION ;
+
+# 18) How many orders placed in Pittsfield city?
+SELECT COUNT(*) AS TOTAL_ORDERS_PLACED FROM ELE_TB 
+WHERE CITY='Pittsfield';
+
+# 19) Query the total sales and total profit by region, country and city?
+SELECT REGION, COUNTRY, CITY, SUM(SALES) AS TOTAL_SALES 
+FROM ELE_TB 
+GROUP BY REGION, COUNTRY, CITY;
+
+# 20) Query the total unit cost and total price by productcategory, productsubcategoryand Manufacturer?
+SELECT MANUFACTURER, PRODUCTCATEGORY, PRODUCTSUBCATEGORY, SUM(UNITCOST) AS TOTAL_UNITCOST
+FROM ELE_TB
+GROUP BY MANUFACTURER, PRODUCTCATEGORY, PRODUCTSUBCATEGORY;
+
+#SELECT * FROM ELE_TB;

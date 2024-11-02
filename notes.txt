@@ -1,0 +1,50 @@
+
+--------------------------DDL--------DATA DEFINITION---------------------
+CREATE
+DROP
+ALTER
+-----IT CAN NOT BE ROLLED BACK
+
+--------------------------DML-----------DATA MANIPULATION---------------------
+INSERT 
+UPDATE
+DELETE
+
+---------------------------DCL-------------DATA CONTROL -----------------
+GRANT
+REVOKE
+
+----------------------------DQL-----DATA QUERY LANGUAGE------------------------
+SELECT
+
+
+
+---------------------------TCL------------TRANSACTIONAL CONTROL-----------------
+
+COMMIT
+ROLLBACK
+SAVEPOINT
+
+ ------------------------------------------
+In real time changes are done on server, once the changes are done in server then
+we can not retrieve it
+
+i.e. commit 
+- once commit is done.....not even god change it
+
+
+------------------------------------------------------------
+#SET SQL_SAFE_UPDATES = 0;
+SET AUTOCOMMIT =0
+
+START TRANSACTION;
+ROLLBACK;
+INTERMEDIATE SAVE: SAVEPOINT A
+ROLLBACK TO A;
+
+EVERYTHING BEFORE SAVEPOINT WILL BE SAVED
+
+ALTER TABLE -----HAS DIRECT ENTRY TO SERVER 
+
+-----------------------------------------------------
+
