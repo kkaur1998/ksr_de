@@ -48,3 +48,4 @@ ALTER TABLE -----HAS DIRECT ENTRY TO SERVER
 
 -----------------------------------------------------
 
+in real time we don't use full join
