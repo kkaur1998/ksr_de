@@ -53,3 +53,63 @@ on a.id = b.c_id;
 select a.name, a.address, b.oid, b.date from 
 ksr_db.custumer_tb a right join ksr_db.order_tb b
 on a.id = b.c_id;
+
+select a.name, a.address, b.oid, b.date from 
+ksr_db.custumer_tb a left join ksr_db.order_tb b
+on a.id = b.c_id
+union #in union exclude duplicates
+select a.name, a.address, b.oid, b.date from 
+ksr_db.custumer_tb a right join ksr_db.order_tb b
+on a.id = b.c_id;
+
+select a.name, a.address, b.oid, b.date from 
+ksr_db.custumer_tb a left join ksr_db.order_tb b
+on a.id = b.c_id
+union all #union all include duplicates... it is faster thn union, because in union, we r removing duplicates after union
+select a.name, a.address, b.oid, b.date from 
+ksr_db.custumer_tb a right join ksr_db.order_tb b
+on a.id = b.c_id;
+
+use ksr_db;
+select * from car_tb limit 5;
+select * from (select * from car_tb) a;
+select car_tb.car_name, car_tb.kms_driven from ksr_db.car_tb;
+select a.car_name, a.kms_driven from (select * from ksr_db.car_tb) a;
+
+
+
+DROP TABLE IF EXISTS STUDENT_MARKS_TB;
+CREATE TABLE STUDENT_MARKS_TB (
+ID INT,
+NAME VARCHAR(20),
+MARKS INT);
+
+INSERT INTO STUDENT_MARKS_TB VALUES(1, 'SANTHOSH',75);
+INSERT INTO STUDENT_MARKS_TB VALUES(2, 'KIRAN',90);
+INSERT INTO STUDENT_MARKS_TB VALUES(3, 'ARJUN',77);
+INSERT INTO STUDENT_MARKS_TB VALUES(4, 'KARTHIK',97);
+INSERT INTO STUDENT_MARKS_TB VALUES(5, 'RAJEV',65);
+INSERT INTO STUDENT_MARKS_TB VALUES(6, 'GOPAL',65);
+INSERT INTO STUDENT_MARKS_TB VALUES(7, 'TARUN',35);
+INSERT INTO STUDENT_MARKS_TB VALUES(8, 'DIYA',99);
+
+select * from ksr_db.student_marks_tb;
+select * from ksr_db.student_marks_tb order by marks desc limit 1;
+select * from ksr_db.student_marks_tb order by marks limit 1;
+select * from (select * from ksr_db.student_marks_tb order by marks desc limit 4) a order by marks limit 1;
+
+
+select * from ksr_db.car_tb limit 5;
+select * from 
+(select year, count(*) as total_cars from ksr_db.car_tb group by year) a
+where total_cars>30;
+
+select * from ksr_db.ele_tb limit 5;
+select * from ( select country, sum(sales) as total_sales from ksr_db.ele_tb
+group by country) a
+where total_sales>100000;
+
+select country, sum(sales) as total_sales from ksr_db.ele_tb
+group by country  
+having total_sales>100000;
+

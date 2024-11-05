@@ -49,3 +49,26 @@ ALTER TABLE -----HAS DIRECT ENTRY TO SERVER
 -----------------------------------------------------
 
 in real time we don't use full join
+ inner join is default
+
+------------------------------------------------------
+UNION VS UNION ALL
+-------
+
+UNION AND UNION ALL BOTH COMBINES THE DATA OF TWO TABLES
+UNION ALL COMBINES ALL ROWS INCLUDING DUPLICATES
+UNION WILL EXCLUDE DUPLICATES
+UNION ALL PERFORM FASTER OPERATION THAN UNION (AS UNION OPEARATION REQUIRE EXTRA FUNCTIONALITY
+OF REMOVING DUPLICATES
+
+
+--------------------------------------------
+always use limit --------
+select * from table limit 10;
+
+-----------------------------------
+find 3rd max salaried employee 
+WHAT ARE WINDOW FUNCTION (RANK, DENSE_RANK, ROW_NUMBER)
+WRITE QUERY 2ND HIGHEST SALARY IN ALL DEPTS 
+DIFFERENCE BETWEEN RANK AND DENSE_RANK
+WHT IS ROW_NUMBER
