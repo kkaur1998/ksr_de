@@ -23,6 +23,7 @@ select * from ksr_db.company_tb where revenue<5000000;
 # 8. Query all companies with revenue smaller than 5000000, but you cannot use the '<' operator?
 select * from ksr_db.company_tb 
 where revenue not in (select revenue from ksr_db.company_tb where revenue>=5000000);
+select revenue from ksr_db.company_tb where not revenue>=5000000;
 
 # 9. Query all employees with salary greater than 50000 and smaller than 70000?
 select * from ksr_db.employee_tb where salary between 50000 and 70000;
@@ -43,11 +44,6 @@ select distinct name from ksr_db.department_tb;
 # 14. Query names of all employees together with id of department they work in, but you cannot use JOIN?
 select a.name,b.name from ksr_db.employee_tb a, ksr_db.department_tb b
 where a.department_id=b.id;
-select 
-	name, 
-    (select name from ksr_db.department_tb d where d.id = e.department_id) department
-from ksr_db.employee_tb e;
-
 
 # 15. Query names of all employees together with id of department they work in, using JOIN?
 select a.name,b.name
