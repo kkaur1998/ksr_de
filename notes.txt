@@ -72,3 +72,36 @@ WHAT ARE WINDOW FUNCTION (RANK, DENSE_RANK, ROW_NUMBER)
 WRITE QUERY 2ND HIGHEST SALARY IN ALL DEPTS 
 DIFFERENCE BETWEEN RANK AND DENSE_RANK
 WHT IS ROW_NUMBER
+
+------------------------------
+
+sum,min,max,avg --- aggregate function
+upper, lower, length, round	---scaler functio	---return one row for every row-like apply
+-------DATE, DATETIME, TIMESTAMP-------
+
+
+basic knowledge on plsql
+hands on exp on procedures and functions
+
+
+stored procedures vs functions
+procedure
+-It is for repetitive code execution
+- can work with or without parameters
+- may or may not have return type
+- we use call procedre_name- can not be used in sql query
+
+
+functions
+- it is for calculated business logic
+- mandatory to have inputs
+- use reeturn type
+- used in select
+
+
+pl-sql - combination of sql along with precedural features of programming language
+
+pl/sql- execute block of code at once
+
+call procedure_name();
+select function_name(parameters mandatory); #it is for mathematical calculations
