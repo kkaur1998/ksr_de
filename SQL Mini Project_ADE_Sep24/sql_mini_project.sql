@@ -127,21 +127,99 @@ group by city
 having total_sales>2000;
 
 # 24)Write a query to get total sales by CustomerName having sales greater than 3000? 
+select a.customername,sum(b.sales) as total_sales from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid
+group by a.CustomerName
+having total_sales>3000
+order by total_sales desc;
+
+
 # 25)Write a query to get total sales and total profit by shipmode? 
+select a.shipmode,sum(b.sales) as total_sales, sum(b.profit) as total_profit from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid
+group by shipmode;
+
 # 26)Write a query to get total sales for North and central region?
+select region, sum(sales) as total_sales from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid
+where region in ('North','Central')
+group by region;
+
 # 27)Write a query to get total sales and total profit for Italy and Spain countries? 
+select country, sum(sales) as total_sales, sum(profit) as total_profit from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid
+where country in ('Italy','Spain')
+group by country;
+
 # 28)Write a query to get the total sales and total profit for each year?
+select year(orderdate) as year, sum(sales) as total_sales, sum(profit) as total_profit from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid
+group by year;
+
 # 29) Find the top 10 customers who spent the most across all transactions. Display the 
 #customer name, total amount spent, and number of orders placed?
-# 30)Write a query to find which products are most preferred by customers based on the 
-#total sales. Display customer name, favorite product9 (top 3 products per each 
-#customer), and total sales on that product?
+with cte as (select customername, sum(orderquantity) as total_order_placed, sum(sales) as total_amount_spent,  dense_rank() over(order by sum(sales) desc) as rnk from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid group by customername) 
+select * from cte where rnk<=10 ;
+
+
+# 30)Write a query to find which products are most preferred by customers based on the total sales. Display
+#customer name, favourite product(top 3 products per each customer) and total sales on that product?
+
+with cte as (select customername,productname,sum(sales) as total_sale, row_number() over (partition by customername order by sum(sales) desc) as rnk
+from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid group by customername,productname)
+select * from cte where rnk<=3;
+
 # 31)Write a query to get 7th rank customer name based on total sales? Display customer 
 #name, sales amount and rank.
+with cte as (select customername,sum(sales) as total_sales, dense_rank() over(order by sum(sales) desc) as rnk from 
+tata_tb1 a left join tata_tb2 b
+on a.orderid=b.orderid
+group by customername)
+select * from cte where rnk=7;
+
 # 32)Write query to get total sales and total profit between year 2011 and 2013?
+with cte as (select year(orderdate) as year, sum(sales) as total_sales, sum(profit) as total_profit from tata_tb1 a left join tata_tb2 b 
+on a.orderid=b.orderid group by year)
+select * from cte where year between 2011 and 2013;
+
 # 33)Write a query to get total sales, total profit and total order qty by country, state, category 
 #and sub-category?
+select a.customername, a.country, a.state, b.Category ,sum(sales) as total_sales, sum(profit) as total_profit, sum(OrderQuantity) as totalqty from tata_tb1 a left join tata_tb2 b
+on a.orderid=b.orderid
+group by 1,2,3,4;
+
+
 # 34)Write stored procedure to get top 10 customers based on total sales?
+delimiter $$
+create procedure get_top10_customers_sales()
+begin
+with cte as (select customername, sum(sales), dense_rank() over(order by sum(sales) desc) as rnk from tata_tb1 a
+left join tata_tb2 b on a.orderid=b.orderid
+group by customername) 
+select * from cte where rnk<=10;
+end
+$$;
+
+
 # 35)Create a virtual table (view) by using OrderID, OrderDate, CustomerName, Region, 
 #country, sales, profit and order qty?
+create view vw_customer_table as(
+select a.orderid, orderdate, customername, region, country, sales,profit from tata_tb1 a
+left join tata_tb2 b on a.orderid=b.orderid
+);
+
+
 # 36)Create a stored procedure to get region sales
+delimiter $$
+create procedure getsalesbyregion(
+in reg varchar(10)
+)
+begin 
+with cte as (select region,sum(sales) from tata_tb1 a left join tata_tb2 b
+on a.orderid=b.orderid
+group by region)
+select * from cte where region=reg;
+end
+$$
