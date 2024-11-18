@@ -18,4 +18,14 @@ order by company_code;
 
 #median of lat_n rounded by 4
 select round(lat_N,4) from (select *, dense_rank() over (order by lat_n) as rnk from station ) a
- where rnk = (select round(count(1)/2) from station)
+ where rnk = (select round(count(1)/2) from station);
+ 
+
+# the report problem hackerrank
+
+select case when grade < 8 then NULL
+else name end as name, grade, marks
+from students s
+inner join grades g
+on  marks between min_mark and max_mark
+order by grade desc,  name asc, marks asc;
