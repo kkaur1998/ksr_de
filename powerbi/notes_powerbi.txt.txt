@@ -1,1 +1,3 @@
 dimension table can never have duplicates
+
+any data if it has date column, always create date_master table
