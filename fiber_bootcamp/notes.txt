@@ -1,0 +1,15 @@
+Project - Uber
+workspace - Uber WS
+
+
+* create gateway - To get data into power bi u need gateway(this is to fetch on-prem data)
+	- Data Gateway (on download icon in powerbi)
+	- standard mode
+	- download and install
+	- Register (fill details)
+	- system shoul be on for gateways
+
+	
+* create lakehouse - can store as file or tables. 
+* create warehouse - only stored in table format (structured data) - come along with sql - can query warehouse
+* Data Pipeline 

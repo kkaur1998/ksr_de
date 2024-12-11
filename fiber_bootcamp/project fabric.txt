@@ -1,0 +1,9 @@
+Uber workspace
+gateway - fabric_bootcamp_gw
+pass - Khalsa@10
+lakhouse- Uber_LH  - you can store files/tables everything
+warehouse -Uber_WH - structured
+
+
+
+medellin architecture
